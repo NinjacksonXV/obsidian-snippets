@@ -1,0 +1,9 @@
+/* Removes embedded border and padding from embedded notes, making them appear as part of the document */
+/* Needs to be enabled via css-classes tag: .clean-note-embed */
+/* Personal aesthetic choice. */
+
+.clean-note-embed .internal-embed {
+    border-right: 0;
+    padding: 0;
+    border-left-width: 0;
+}
