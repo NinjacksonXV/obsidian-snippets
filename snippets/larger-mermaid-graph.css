@@ -1,0 +1,7 @@
+/* Makes mermaid graphs larger. */
+/* Personal aesthetic choice. */
+
+.mermaid svg { 
+    max-width: 100%; 
+    height: auto;
+  }
