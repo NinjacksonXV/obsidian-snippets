@@ -1,0 +1,2 @@
+# Obsidian Snippets
+These are some miscellaneous snippets that I have created/collected over time. Each snippet contains a reason for its existence and a basic description of some of the more complex selector logic (mostly for myself to remember).  
