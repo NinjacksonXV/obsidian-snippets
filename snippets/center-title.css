@@ -1,0 +1,9 @@
+/* Centers the title and adds a horizontal rule underneath. */
+/* Personal aesthetic choice. */
+
+.inline-title
+{
+    text-align: center;
+    border-bottom: solid var(--hr-thickness) var(--hr-color);
+    padding-bottom: 12px;
+}
