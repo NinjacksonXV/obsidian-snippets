@@ -1,4 +1,6 @@
 /* This makes table headers not render as bold for greater customization, e.g. vertical headers */
+/* Personal aesthetic choice. */
+
 .markdown-rendered th
 {
     font-weight: normal;
