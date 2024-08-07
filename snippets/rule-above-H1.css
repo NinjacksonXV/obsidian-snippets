@@ -1,0 +1,40 @@
+/* Credit to @sailKite on Discord for helping me out with this. 
+   This snippet is annoyingly complicated. I've covered all the edge cases that I could; it works on
+   documents that are only partially loaded by checking if specific elements exist. Rarely, when
+   scrolling too quickly, the element can flash in as a new rule gets applied; if there are optimizations
+   I can do to mitigate this, please let me know or make a PR. 
+
+   To make it work with a given header type/class, replace .HyperMD-header-*1* and h*1* with the style you want, or remove 
+   the integer entirely to apply it to all headers.
+*/
+
+/* LIVE PREVIEW */
+/*
+   The default stylization when the top of the document is loaded. It selects every instance of .HyperMD-header-1 except the first,
+   UNLESS there is any text above.
+*/
+.markdown-source-view .cm-content > :nth-child(n + 2 of div).HyperMD-header-1,
+/*
+   This qualifier is for when the top of the script is unloaded. It essentially checks that the .cm-content's
+   first child is a div of class .cm-gap, as this appears when the top of the document is unloaded. When the bottom is unloaded, 
+   another cm-gap appears at the bottom of this branch, so we need :first-child. Finally, it applies to all .HyperMD-header-x.
+*/
+.markdown-source-view .cm-content:has(div[class="cm-gap"]:first-child) > .HyperMD-header-1,
+
+/* READING VIEW */
+/*
+   The default stylization when the top of the document is loaded. Since H1s are children of blank divs, we have to apply
+   selection logic to those instead of h1s directly. The N+3 works for some reason. 
+*/
+.markdown-preview-view :nth-child(n + 3 of :is(div:not(.mod-header))) > h1,
+/*
+   We're checking if a given element is NOT a markdown-preview-section that has a div of class mod-header;
+   if it does, this indicates that the top of the page is loaded. Finally, we get the direct children of that element 
+   that have an h1, which we then target. This one seems oddly specific but I don't recall why. 
+*/
+.markdown-preview-view :is(:not(.markdown-preview-section:has(div[class="mod-header"]))) > div:has(h1) > h1
+{
+   border-top: var(--hr-thickness) solid var(--hr-color); /* Identical to horizontal rule */
+   padding-top: 24px !important; /* needed to override spacing when there's only one empty p above this header */
+   margin-top: 12px !important;  /* needed to override .cm-s */
+}
